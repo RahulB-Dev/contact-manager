@@ -18,8 +18,14 @@ export class AddContactComponent {
 contact: Contact = { id: 0, name: '', email: '', phone: '' };
 
 constructor(private contactService: ContactService, public router: Router) { }
-saveContact() {
-  this.contactService.addContact(this.contact);
+saveContact(): void {
+  this.contactService.addContact(this.contact).subscribe({
+    next: () => {
   this.router.navigate(['/']);
+    },
+    error: (error) => {
+      console.error('Error adding contact:', error);
+    }
+  });
 }
 }

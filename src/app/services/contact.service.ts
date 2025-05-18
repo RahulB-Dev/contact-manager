@@ -1,47 +1,38 @@
-import { Injectable } from '@angular/core';
-import { Contact } from '../models/contact.model';
+import { Injectable } from '@angular/core';                 
+import { HttpClient } from '@angular/common/http';         
+import { Observable } from 'rxjs';                         
+import { Contact } from '../models/contact.model';         
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root'                                       
 })
 export class ContactService {
-  private storageKey = 'contacts';
- constructor() { 
-  this.initializeContacts();
- }
-  private contacts: Contact[] = [];
-  private initializeContacts(): void {
-    const stored = localStorage.getItem(this.storageKey);
-    if (stored) {
-      this.contacts = JSON.parse(stored);
-    }
-    else {
-      this.contacts = [];
-    }
+  private apiUrl = 'https://localhost:7128/api/Contacts'; 
+
+  constructor(private http: HttpClient) {}                
+
+  
+  getContacts(): Observable<Contact[]> {
+    return this.http.get<Contact[]>(this.apiUrl);
   }
-  private saveContacts(): void {
-    localStorage.setItem(this.storageKey, JSON.stringify(this.contacts));
+
+  
+  getContactById(id: number): Observable<Contact> {
+    return this.http.get<Contact>(`${this.apiUrl}/${id}`);
   }
-  getContacts(): Contact[] {
-    return this.contacts;
+
+  
+  addContact(contact: Contact): Observable<Contact> {
+    return this.http.post<Contact>(this.apiUrl, contact);
   }
-  getContactById(id: number): Contact | undefined {
-    return this.contacts.find(contact => contact.id === id);
+
+  
+  updateContact(contact: Contact): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${contact.id}`, contact);
   }
-  addContact(contact: Contact): void {
-    contact.id = Date.now();
-    this.contacts.push(contact);
-    this.saveContacts();
-  }
-  updateContact(updated: Contact): void {
-    const index = this.contacts.findIndex(c => c.id === updated.id);
-    if (index !== -1) {
-      this.contacts[index] = updated;
-      this.saveContacts();
-    }
-  }
-  deleteContact(id: number): void {
-    this.contacts = this.contacts.filter(contact => contact.id !== id);
-    this.saveContacts();
+
+  
+  deleteContact(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

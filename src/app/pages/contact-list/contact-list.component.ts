@@ -14,18 +14,34 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
+  loading: boolean = true;
 
   constructor(private contactService: ContactService, public router: Router) { }
 
   ngOnInit(): void {
-    this.contacts = this.contactService.getContacts();
+    this.getContactsFromApi();
+  }
+  getContactsFromApi() {
+    this.contactService.getContacts().subscribe({
+      next: (data) => {
+        this.contacts = data;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching contacts:', error);
+        this.loading = false;
+      }
+    });
   }
   editContact(id: number) {
     this.router.navigate(['/edit', id]);
   }
-  deleteContact(id:number) {
-    this.contactService.deleteContact(id);
-    this.contacts = this.contactService.getContacts();
+  deleteContact(id:number): void {
+    this.contactService.deleteContact(id).subscribe({
+      next: () => this.getContactsFromApi(),
+      error: (error) => console.error('Error deleting contact:', error)
+    });
+    
   }
 
 }

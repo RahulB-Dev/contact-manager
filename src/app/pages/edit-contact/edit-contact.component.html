@@ -1,6 +1,6 @@
 <h2> Edit Contact</h2>
 
-<form (ngSubmit)="updateContact()">
+<form *ngif="!loading"(ngSubmit)="updateContact()">
   <!-- Name -->
   <mat-form-field appearance="outline" style="display:block; margin-bottom: 10px;">
     <mat-label>Name</mat-label>

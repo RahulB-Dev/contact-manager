@@ -1,6 +1,7 @@
 <h2> Contacts List</h2>
 <button mat-raised-button color="primary" (click)="router.navigate(['/add'])">Add New Contact</button>
 
+<div *ngIf="loading">Loading Contacts...</div>
     <mat-card *ngFor="let contact of contacts" style ="margin: 10px 0;">
         <mat-card-title> {{contact.name}} </mat-card-title>
         <mat-card-content>

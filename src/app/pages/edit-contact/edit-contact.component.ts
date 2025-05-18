@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class EditContactComponent implements OnInit {
   contact!: Contact;
+  loading: boolean = true;
 
   constructor(
     private contactService: ContactService,
@@ -24,16 +25,26 @@ export class EditContactComponent implements OnInit {
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
 
-    const existing = this.contactService.getContactById(id);
-    if (existing) {
-      this.contact = { ...existing };
+   this.contactService.getContactById(id).subscribe({
+      next: (data) => {
+        this.contact = data;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching contact:', error);
+        this.loading = false;
+      }
+    });
+  }
+
+updateContact() {
+  this.contactService.updateContact(this.contact).subscribe({
+    next: () => {
+      this.router.navigate(['/']);
+    },
+    error: (error) => {
+      console.error('Error updating contact:', error);
     }
-  }
-
-  updateContact() {
-    this.contactService.updateContact(this.contact);
-    this.router.navigate(['/']);
-  }
-
-  
+  });
+}
 }
