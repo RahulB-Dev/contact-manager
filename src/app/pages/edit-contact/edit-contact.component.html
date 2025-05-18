@@ -1,0 +1,17 @@
+<h2> Edit Contact</h2>
+
+<form (ngSubmit)="updateContact()">
+    <label>Name:</label>
+    <input [(ngModel)]="contact.name" name="name" required/>
+    <br/><br/>
+
+    <label>Email:</label>
+    <input [(ngModel)]="contact.email" name="email" required/>
+    <br/><br/>
+
+    <label>Phone:</label>
+    <input [(ngModel)]="contact.phone" name="phone" required/>
+    <br/><br/>
+
+    <button type="submit">Update</button>
+</form>

@@ -1,0 +1,8 @@
+<h2> Contacts List</h2>
+<button (click)="router.navigate(['/add'])">Add New Contact</button>
+<ul>
+    <li *ngFor="let contact of contacts">
+        <strong>{{contact.name}}</strong> - {{contact.email}} - {{contact.phone}}
+        <button  (click)="editContact(contact.id)">Edit</button>
+        <button (click)="deleteContact(contact.id)">Delete</button>
+</ul>
