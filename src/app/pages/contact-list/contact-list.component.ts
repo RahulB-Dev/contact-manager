@@ -3,10 +3,12 @@ import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../models/contact.model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-contact-list',
-  imports: [CommonModule],
+  imports: [CommonModule,MatButtonModule,MatCardModule],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.css'
 })

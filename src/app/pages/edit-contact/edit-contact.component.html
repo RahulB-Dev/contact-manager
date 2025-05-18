@@ -1,17 +1,23 @@
 <h2> Edit Contact</h2>
 
 <form (ngSubmit)="updateContact()">
-    <label>Name:</label>
-    <input [(ngModel)]="contact.name" name="name" required/>
-    <br/><br/>
+  <!-- Name -->
+  <mat-form-field appearance="outline" style="display:block; margin-bottom: 10px;">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="contact.name" name="name" required />
+  </mat-form-field>
 
-    <label>Email:</label>
-    <input [(ngModel)]="contact.email" name="email" required/>
-    <br/><br/>
+  <!-- Email -->
+  <mat-form-field appearance="outline" style="display:block; margin-bottom: 10px;">
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="contact.email" name="email" required />
+  </mat-form-field>
 
-    <label>Phone:</label>
-    <input [(ngModel)]="contact.phone" name="phone" required/>
-    <br/><br/>
+  <!-- Phone -->
+  <mat-form-field appearance="outline" style="display:block; margin-bottom: 10px;">
+    <mat-label>Phone</mat-label>
+    <input matInput [(ngModel)]="contact.phone" name="phone" required />
+  </mat-form-field>
 
-    <button type="submit">Update</button>
+    <button mat-raised-button color="primary" type="submit">Update</button>
 </form>

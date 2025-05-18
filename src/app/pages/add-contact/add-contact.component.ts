@@ -3,11 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../models/contact.model';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @Component({
   selector: 'app-add-contact',
-  imports: [FormsModule],
+  imports: [FormsModule,MatButtonModule,MatInputModule,MatFormFieldModule],
   templateUrl: './add-contact.component.html',
   styleUrl: './add-contact.component.css'
 })

@@ -1,8 +1,15 @@
 <h2> Contacts List</h2>
-<button (click)="router.navigate(['/add'])">Add New Contact</button>
-<ul>
-    <li *ngFor="let contact of contacts">
-        <strong>{{contact.name}}</strong> - {{contact.email}} - {{contact.phone}}
-        <button  (click)="editContact(contact.id)">Edit</button>
-        <button (click)="deleteContact(contact.id)">Delete</button>
-</ul>
+<button mat-raised-button color="primary" (click)="router.navigate(['/add'])">Add New Contact</button>
+
+    <mat-card *ngFor="let contact of contacts" style ="margin: 10px 0;">
+        <mat-card-title> {{contact.name}} </mat-card-title>
+        <mat-card-content>
+            <p> Email: {{ contact.email}}</p>
+            <p> Phone: {{ contact.phone}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button color="accent" (click)="editContact(contact.id)">Edit</button>
+            <button mat-button color="warn" (click)="deleteContact(contact.id)">Delete</button>
+        </mat-card-actions>
+    </mat-card>
+

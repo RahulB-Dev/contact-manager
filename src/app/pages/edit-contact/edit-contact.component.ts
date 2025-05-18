@@ -3,10 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../models/contact.model';
+import { MatFormField, MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-edit-contact',
-  imports: [FormsModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './edit-contact.component.html',
   styleUrl: './edit-contact.component.css'
 })
